@@ -126,10 +126,6 @@ trv.heading(5, text= "Ulica")
 trv.heading(6, text= "Symbol Nieruchomości")
 trv.bind('<Double 1>', getrow)
 
-#Scrollbary
-# yscrollbar = ttk.Scrollbar(window1, orient="vertical", command = trv.yview)
-# yscrollbar.pack(side=RIGHT, fill="y")
-
 query = "SELECT idBudynek, SymbolBudynku, SymbolOsiedla, KodPocztowy, Ulica, SymbolNieruchomosci, Numery FROM blok"
 cursor.execute(query)
 rows = cursor.fetchall()
