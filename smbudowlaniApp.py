@@ -4,9 +4,8 @@ from tkinter import ttk
 from tkinter.ttk import Treeview
 # -*- coding: utf-8 -*-
 import mysql.connector
-from smsapi.client import SmsApiComClient
-from smsapi.client import SmsApiPlClient
 from tkinter import messagebox
+from smsapi.client import SmsApiPlClient
 from smsapi.exception import SmsApiException
 import os
 
@@ -31,7 +30,8 @@ def chooseText(event):
     for i in rows:
         idTresc.set(i[0])
         naglowekTresc.set(i[1])
-        tekstTresc.set(i[2])
+        # tekstTresc.set(i[2])
+        ent7.insert(1.0, i[2])
 
 def getrow(event):
     rowid = trv.identify_row(event.y)
@@ -126,6 +126,10 @@ trv.heading(5, text= "Ulica")
 trv.heading(6, text= "Symbol Nieruchomości")
 trv.bind('<Double 1>', getrow)
 
+#Scrollbary
+# yscrollbar = ttk.Scrollbar(window1, orient="vertical", command = trv.yview)
+# yscrollbar.pack(side=RIGHT, fill="y")
+
 query = "SELECT idBudynek, SymbolBudynku, SymbolOsiedla, KodPocztowy, Ulica, SymbolNieruchomosci, Numery FROM blok"
 cursor.execute(query)
 rows = cursor.fetchall()
@@ -188,7 +192,7 @@ mycombo.bind("<<ComboboxSelected>>", chooseText)
 
 lbl7 = Label(window3, text="Wiadomość SMS:",font=("bold", 12))
 lbl7.grid(row=7, column=0, padx=5, pady=3)
-ent7 = Entry(window3, font=("bold", 12), width="70", textvariable=tekstTresc)
+ent7 = Text(window3, font=("bold", 12), width="30", height=2, wrap=WORD)
 ent7.grid(row=7, rowspan=2, column=1, padx=5, pady=3, ipady=80, ipadx=40, sticky=NSEW)
 
 #sekcja szczegóły buttony
