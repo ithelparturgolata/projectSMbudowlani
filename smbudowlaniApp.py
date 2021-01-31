@@ -64,7 +64,7 @@ def clear():
     entSearch.delete(0, END)
 
 def clearText():
-    ent7.delete(0, END)
+    ent7.delete("1.0", END)
 
 def search():
     try:
