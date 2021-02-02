@@ -74,7 +74,7 @@ def search():
         rows = cursor.fetchall()
         update(rows)
     except TclError:
-        messagebox.showerror("Uwaga", "Musisz podać 4 cyfry")
+        messagebox.showerror("Uwaga", "Musisz podać cyfry.")
 
 def sendSMS():
     try:
@@ -86,7 +86,7 @@ def sendSMS():
         for result in send_results:
             print(result.id, result.points, result.error)
     except SmsApiException:
-        messagebox.showerror("Uwaga", "Wypełnij pole Telefony aby wysłać wiadomość")
+        messagebox.showerror("Uwaga", "Pole Telefony nie może być puste.")
 
 root = Tk()
 
@@ -116,8 +116,7 @@ window3.pack(fill="both", expand="yes", padx=20, pady=10)
 #sekcja wyświetl wszystko w 1 oknie
 trv = Treeview(window1, columns=(1,2,3,4,5,6), show="headings", height="10")
 trv.pack()
-#trv.pack(side=RIGHT)
-# trv.place(x=0, y=0)
+#trv naglowki
 trv.heading(1, text= "ID Budynek")
 trv.heading(2, text= "Symbol Budynku")
 trv.heading(3, text= "Symbol Osiedla")
@@ -125,10 +124,6 @@ trv.heading(4, text= "Kod Pocztowy")
 trv.heading(5, text= "Ulica")
 trv.heading(6, text= "Symbol Nieruchomości")
 trv.bind('<Double 1>', getrow)
-
-#Scrollbary
-# yscrollbar = ttk.Scrollbar(window1, orient="vertical", command = trv.yview)
-# yscrollbar.pack(side=RIGHT, fill="y")
 
 query = "SELECT idBudynek, SymbolBudynku, SymbolOsiedla, KodPocztowy, Ulica, SymbolNieruchomosci, Numery FROM blok"
 cursor.execute(query)
@@ -201,6 +196,7 @@ btnSMS.grid(row=9, column=1, padx=5, pady=3, sticky=E)
 
 btnClearSMS = Button(window3, text="Wyczyść treść", command=clearText, font=("bold", 12), activebackground="yellow")
 btnClearSMS.grid(row=9, column=1, padx=5, pady=3)
+
 
 update(rows)
 root.title("System SMS SM Budowlani")
